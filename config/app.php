@@ -137,11 +137,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        /**
-         * Vendor Service Providers...
-         */
-
-        Collective\Html\HtmlServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -150,6 +145,7 @@ return [
         TeachMe\Providers\AuthServiceProvider::class,
         TeachMe\Providers\EventServiceProvider::class,
         TeachMe\Providers\RouteServiceProvider::class,
+        \TeachMe\Providers\HtmlServiceProvider::class,
 
     ],
 
