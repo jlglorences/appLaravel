@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Jorge Lorences</title>
 
-    <link href="http://app.localhost:8080/assets/css/style.css" rel="stylesheet">
+
+    {!! Html::style('assets/css/style.css') !!}
 
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto+Slab:300,700' rel='stylesheet' type='text/css'>
@@ -32,7 +33,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="http://duilio.me" target="_blank">Jorge Lor.</a>
+                    <a class="navbar-brand" href="http://app.localhost:8080" target="_blank">Jorge Lor.</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
