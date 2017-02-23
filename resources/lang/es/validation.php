@@ -144,6 +144,8 @@ return [
         'time'                  => 'hora',
         'subject'               => 'asunto',
         'message'               => 'mensaje',
+        'link'                  => 'Enlace',
+        'comment'               => 'Comentarios'
     ],
 
 ];
