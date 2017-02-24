@@ -7,12 +7,25 @@ use TeachMe\Entities\TicketComment;
 use TeachMe\Http\Requests;
 use TeachMe\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use TeachMe\Repositories\TicketRepository;
 
 class TicketsController extends Controller {
 
-	public function latest()
+    /**
+     * @var TicketRepository
+     */
+    private $ticketRepository;
+
+    public function __construct(TicketRepository $ticketRepository)
     {
-        $tickets = Ticket::orderBy('created_at' , 'DESC')->with('author')->paginate(20);
+
+        $this->ticketRepository = $ticketRepository;
+    }
+
+    public function latest()
+    {
+        $tickets = $this->ticketRepository->paginateLatest();
+
         return view('tickets/list', compact('tickets'));
     }
 
@@ -23,19 +36,21 @@ class TicketsController extends Controller {
 
     public function open()
     {
-        $tickets = Ticket::where('status', 'open')->orderBy('created_at', 'DESC')->paginate(20);
+        $tickets = $this->ticketRepository->paginateOpen();
+
         return view('tickets/list', compact('tickets'));
     }
 
     public function closed()
     {
-        $tickets = Ticket::where('status', 'closed')->orderBy('created_at', 'DESC')->paginate(20);
+        $tickets = $this->ticketRepository->paginateClosed();
+
         return view('tickets/list', compact('tickets'));
     }
 
     public function details($id)
     {
-        $ticket = Ticket::findOrFail($id);
+        $ticket = $this->ticketRepository->findOrFail($id);
         return view('tickets/details', compact('ticket'));
     }
 
@@ -52,10 +67,10 @@ class TicketsController extends Controller {
 
         // Forma optima de implementeacion (hace falta indicar en el modelo que debe permitir la asignacion masiva
         // de los campos 'title' y 'status'
-        $ticket = $auth->user()->tickets()->create([
-            'title'     => $request->get('title'),
-            'status'    => 'open'
-        ]);
+        $ticket = $this->ticketRepository->openNew(
+            $auth->user(),
+            $request->get('title')
+        );
 
         // forma mas común para implementarlo
         /*
