@@ -1,11 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jorge Lorences</title>
-
+    <title>TeachMe by duilio.me</title>
 
     {!! Html::style('assets/css/style.css') !!}
 
@@ -21,6 +21,7 @@
     <![endif]-->
 </head>
 <body>
+<div id="notifications"></div>
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="row">
@@ -33,12 +34,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="http://app.localhost:8080" target="_blank">Jorge Lor.</a>
+                    <a class="navbar-brand" href="http://duilio.me" target="_blank">duilio.me</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-                    {!! Html::menu('tickets.menu') !!}
+                    {!! Html::menu('teachme.menu') !!}
 
                     @include('layout/login')
                 </div>
@@ -52,5 +53,7 @@
 <!-- Scripts -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="{{ asset('assets/js/app.js') }}"></script>
+<script src="{{ asset('assets/js/alert.js') }}"></script>
 </body>
 </html>

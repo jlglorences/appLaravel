@@ -8,8 +8,6 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
@@ -20,16 +18,16 @@ class DatabaseSeeder extends Seeder
             'password_resets',
             'tickets',
             'ticket_votes',
-            'ticket_comments'
+            'ticket_comments',
         ));
 
-        $this->call(UserTableSeeder::class);
-        $this->call(TicketTableSeeder::class);
-
-        Model::reguard();
+        $this->call('UserTableSeeder');
+        $this->call('TicketTableSeeder');
+        $this->call('TicketVoteTableSeeder');
+        $this->call('TicketCommentTableSeeder');
     }
 
-    public function truncateTables(array $tables)
+    private function truncateTables(array $tables)
     {
         $this->checkForeignKeys(false);
 
@@ -40,9 +38,9 @@ class DatabaseSeeder extends Seeder
         $this->checkForeignKeys(true);
     }
 
-    public function checkForeignKeys($check)
+    private function checkForeignKeys($check)
     {
         $check = $check ? '1' : '0';
-        DB::statement("SET FOREIGN_KEY_CHECKS = $check");
+        DB::statement("SET FOREIGN_KEY_CHECKS = $check;");
     }
 }

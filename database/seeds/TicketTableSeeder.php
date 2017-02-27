@@ -1,17 +1,21 @@
 <?php
 
-use Illuminate\Database\Seeder;
+
 use TeachMe\Entities\Ticket;
 
-class TicketTableSeeder extends Seeder
+class TicketTableSeeder extends BaseSeeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public function getModel()
     {
-        factory(Ticket::class, 50)->create();
+        return new Ticket();
+    }
+
+    public function getDummyData(\Faker\Generator $faker, array $customValues = array())
+    {
+        return [
+            'title'   => $faker->sentence(),
+            'status'  => $faker->randomElement(['open', 'open', 'closed']),
+            'user_id' => $this->getRandom('User')->id,
+        ];
     }
 }

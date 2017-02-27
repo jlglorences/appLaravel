@@ -1,20 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jlorences
- * Date: 24/02/2017
- * Time: 11:20
- */
 
 namespace TeachMe\Repositories;
 
-
-abstract class BaseRepository{
+abstract class BaseRepository {
 
     /**
      * @return \TeachMe\Entities\Entity
      */
-
     abstract public function getModel();
 
     /**
@@ -29,4 +21,5 @@ abstract class BaseRepository{
     {
         return $this->newQuery()->findOrFail($id);
     }
+
 }

@@ -8,21 +8,20 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 class EventServiceProvider extends ServiceProvider
 {
     /**
-     * The event listener mappings for the application.
+     * The event handler mappings for the application.
      *
      * @var array
      */
     protected $listen = [
-        'TeachMe\Events\SomeEvent' => [
-            'TeachMe\Listeners\EventListener',
+        'event.name' => [
+            'EventListener',
         ],
     ];
 
     /**
      * Register any other events for your application.
      *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
-     * @return void
+     * @param \Illuminate\Contracts\Events\Dispatcher $events
      */
     public function boot(DispatcherContract $events)
     {

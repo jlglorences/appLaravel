@@ -4,6 +4,7 @@ namespace TeachMe\Entities;
 
 class Ticket extends Entity
 {
+
     protected $fillable = ['title', 'status'];
 
     public function author()

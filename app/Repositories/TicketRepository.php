@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jlorences
- * Date: 24/02/2017
- * Time: 9:52
- */
 
 namespace TeachMe\Repositories;
 
@@ -21,16 +15,15 @@ class TicketRepository extends BaseRepository {
     {
         return $this->newQuery()->selectRaw(
             'tickets.*, '
-            . '(SELECT COUNT(*) FROM ticket_comments WHERE ticket_comments.ticket_id = tickets.id) as num_comments, '
-            . '(SELECT COUNT(*) FROM ticket_votes WHERE ticket_votes.ticket_id = tickets.id) as num_votes '
-        )
-            ->with('author');
+            . '( SELECT COUNT(*) FROM ticket_comments WHERE ticket_comments.ticket_id = tickets.id ) as num_comments,'
+            . '( SELECT COUNT(*) FROM ticket_votes WHERE ticket_votes.ticket_id = tickets.id ) as num_votes'
+        )->with('author');
     }
 
     public function paginateLatest()
     {
         return $this->selectTicketsList()
-            ->orderBy('created_at' , 'DESC')
+            ->orderBy('created_at', 'DESC')
             ->paginate(20);
     }
 
@@ -52,9 +45,9 @@ class TicketRepository extends BaseRepository {
 
     public function openNew($user, $title)
     {
-        $ticket = $user->tickets()->create([
-            'title'     => $title,
-            'status'    => 'open'
+        return $user->tickets()->create([
+            'title'  => $title,
+            'status' => 'open'
         ]);
     }
 

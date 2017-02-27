@@ -3,12 +3,11 @@
 namespace TeachMe\Components;
 
 use Illuminate\Contracts\Config\Repository as Config;
-//use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Contracts\View\Factory as View;
 use Collective\Html\HtmlBuilder as CollectiveHtmlBuilder;
 use Illuminate\Routing\UrlGenerator;
 
-class HtmlBuilder extends CollectiveHtmlBuilder{
+class HtmlBuilder extends CollectiveHtmlBuilder {
 
     /**
      * @var Config
@@ -21,7 +20,6 @@ class HtmlBuilder extends CollectiveHtmlBuilder{
 
     public function __construct(Config $config, View $view, UrlGenerator $url)
     {
-
         $this->config = $config;
         $this->view = $view;
         $this->url = $url;
@@ -29,17 +27,18 @@ class HtmlBuilder extends CollectiveHtmlBuilder{
 
     public function menu($items)
     {
-        if (! is_array($items))
+        if ( ! is_array($items))
         {
             $items = $this->config->get($items, array());
         }
+
         return $this->view->make('partials/menu', compact('items'));
     }
 
     /**
-     * Builds an HTML attribute dynamically
+     * Builds an HTML class attribute dynamically
      * Usage:
-     * {!! Html::casses(['home' => true, 'main', 'dont-use-this' => false]) !!}
+     * {!! Html::classes(['home' => true, 'main', 'dont-use-this' => false]) !!}
      * Returns:
      *  class="home main".
      *
@@ -50,18 +49,19 @@ class HtmlBuilder extends CollectiveHtmlBuilder{
     public function classes(array $classes)
     {
         $html = '';
-        foreach ($classes as $name =>$bool){
-            if (is_int($name)){
+        foreach ($classes as $name => $bool) {
+            if (is_int($name)) {
                 $name = $bool;
                 $bool = true;
             }
-            if (($bool)){
-                $html .=$name.' ';
+            if ($bool) {
+                $html .= $name.' ';
             }
         }
-        if (! empty($html)){
+        if (! empty($html)) {
             return ' class="'.trim($html).'"';
         }
         return '';
     }
+
 }

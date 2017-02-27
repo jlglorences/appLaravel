@@ -1,12 +1,11 @@
-<?php
-
-namespace TeachMe\Providers;
+<?php namespace TeachMe\Providers;
 
 use Collective\Html\HtmlServiceProvider as CollectiveHtmlServiceProvider;
 use TeachMe\Components\HtmlBuilder;
 
 class HtmlServiceProvider extends CollectiveHtmlServiceProvider
 {
+
     /**
      * Register the HTML builder instance.
      *
@@ -14,9 +13,10 @@ class HtmlServiceProvider extends CollectiveHtmlServiceProvider
      */
     protected function registerHtmlBuilder()
     {
-        $this->app->singleton('html', function ($app)
+        $this->app->bindShared('html', function($app)
         {
             return new HtmlBuilder($app['config'], $app['view'], $app['url']);
         });
     }
+
 }
