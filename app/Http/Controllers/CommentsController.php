@@ -34,7 +34,7 @@ class CommentsController extends Controller {
 
         $this->commentRepository->create(
             $ticket,
-            currentUser(),
+            auth()->user(),
             $request->get('comment'),
             $request->get('link')
         );

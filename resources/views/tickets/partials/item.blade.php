@@ -6,12 +6,12 @@
     @if (Auth::check())
     <p>
         <a href="#"
-           {!! Html::classes(['btn btn-primary btn-vote', 'hidden' => currentUser()->hasVoted($ticket)]) !!}
+           {!! Html::classes(['btn btn-primary btn-vote', 'hidden' => auth()->user()->hasVoted($ticket)]) !!}
            title="Votar por este tutorial">
             <span class="glyphicon glyphicon-thumbs-up"></span> Votar
         </a>
         <a href="#"
-           {!! Html::classes(['btn btn-hight btn-unvote', 'hidden' => !currentUser()->hasVoted($ticket)]) !!}
+           {!! Html::classes(['btn btn-hight btn-unvote', 'hidden' => !auth()->user()->hasVoted($ticket)]) !!}
            title="Quitar el voto a este tutorial">
             <span class="glyphicon glyphicon-thumbs-down"></span> Quitar voto
         </a>

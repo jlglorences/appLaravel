@@ -57,7 +57,7 @@ class TicketsController extends Controller {
         ]);
 
         $ticket = $this->ticketRepository->openNew(
-            currentUser(),
+            auth()->user(),
             $request->get('title')
         );
 

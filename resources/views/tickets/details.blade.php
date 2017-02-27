@@ -30,7 +30,7 @@
             @endforeach
             </p>
             @if (Auth::check())
-                @if ( ! currentUser()->hasVoted($ticket))
+                @if ( ! auth()->user()->hasVoted($ticket))
                 {!! Form::open(['route' => ['votes.submit', $ticket->id], 'method' => 'POST']) !!}
                     <button type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-thumbs-up"></span> Votar

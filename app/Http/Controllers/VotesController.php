@@ -1,39 +1,45 @@
-<?php
-
-namespace TeachMe\Http\Controllers;
+<?php namespace TeachMe\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use TeachMe\Entities\Ticket;
-use TeachMe\Http\Requests;
-use TeachMe\Http\Controllers\Controller;
 use TeachMe\Repositories\TicketRepository;
 use TeachMe\Repositories\VoteRepository;
 
-class VotesController extends Controller{
+class VotesController extends Controller {
 
-    protected $ticketRepository;
-    protected $voteRepository;
+    private $ticketRepository;
+    private $voteRepository;
 
-    function __construct(TicketRepository $ticketRepository, VoteRepository $voteRepository)
+    public function __construct(
+        TicketRepository $ticketRepository,
+        VoteRepository $voteRepository
+    )
     {
         $this->ticketRepository = $ticketRepository;
         $this->voteRepository = $voteRepository;
     }
 
-    public function submit($id)
+    public function submit($id, Request $request)
     {
         $ticket = $this->ticketRepository->findOrFail($id);
-        $this->voteRepository->vote(auth()->user(), $ticket);
+        $success = $this->voteRepository->vote(auth()->user(), $ticket);
+
+        if ($request->ajax()) {
+            return response()->json(compact('success'));
+        }
+
+        return redirect()->back();
+	}
+
+    public function destroy($id, Request $request)
+    {
+        $ticket = $this->ticketRepository->findOrFail($id);
+        $success = $this->voteRepository->unvote(auth()->user(), $ticket);
+
+        if ($request->ajax()) {
+            return response()->json(compact('success'));
+        }
 
         return redirect()->back();
     }
 
-    public function destroy($id)
-    {
-        $ticket = $this->ticketRepository->findOrFail($id);
-        $this->voteRepository->unvote(auth()->user(), $ticket);
-
-        return redirect()->back();
-    }
 }
